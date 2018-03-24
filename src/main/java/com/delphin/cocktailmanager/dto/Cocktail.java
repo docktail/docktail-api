@@ -1,8 +1,9 @@
 package com.delphin.cocktailmanager.dto;
 
-import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.List;
 
 @Document
 public class Cocktail {
@@ -12,11 +13,19 @@ public class Cocktail {
 
     private String name;
 
-    public Cocktail() {
+    private List<Ingredient> ingredients;
+
+
+    public List<Ingredient> getIngredients() {
+        return ingredients;
     }
 
-    public Cocktail(String name) {
-        this.name = name;
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public void addIngredient(Ingredient ingredient){
+        this.ingredients.add(ingredient);
     }
 
     public String getName() {

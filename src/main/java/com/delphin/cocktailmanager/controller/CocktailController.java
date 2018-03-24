@@ -7,11 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 
-@RestController()
+@RestController
 @RequestMapping("/cocktails")
 public class CocktailController {
 
-    private CocktailRepository cocktailRepository ;
+    private final CocktailRepository cocktailRepository ;
 
     public CocktailController(CocktailRepository cocktailRepository) {
         this.cocktailRepository = cocktailRepository;
@@ -23,13 +23,10 @@ public class CocktailController {
         cocktailRepository.save(cocktail).subscribe();
     }
 
-
-
     @GetMapping
     public Flux<Cocktail> getAllCocktails(){
         return cocktailRepository.findAll();
     }
-
 
     @GetMapping("/{name}")
     public Flux<Cocktail> getCocktailsByName(@PathVariable String name){
@@ -37,11 +34,8 @@ public class CocktailController {
     }
 
     @DeleteMapping
-    public String deleteAllCocktails() {
+    public void deleteAllCocktails() {
         cocktailRepository.deleteAll().subscribe();
-        return "OK";
     }
-
-
 
 }
